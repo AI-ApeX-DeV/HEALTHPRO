@@ -21,7 +21,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 app = Flask(__name__)
 app.secret_key = '1234'
 
-config = {
+'''config = {
     "apiKey": os.getenv("apiKey"),
     "authDomain": os.getenv("authDomain"),
     "databaseURL": os.getenv("databaseURL"),
@@ -30,8 +30,8 @@ config = {
     "messagingSenderId": os.getenv("messagingSenderId"),
     "appId": os.getenv("appId"),
     "measurementId": os.getenv("measurementId")
-}
-'''config = {
+}'''
+config = {
     "apiKey": "AIzaSyAvYvSqBoQzCUDK2oloq79JhPJGTw1DIUk",
     "authDomain": "dashboard-50078.firebaseapp.com",
     "databaseURL": "https://dashboard-50078-default-rtdb.firebaseio.com",
@@ -39,7 +39,8 @@ config = {
     "storageBucket": "dashboard-50078.appspot.com",
     "messagingSenderId": "475329238769",
     "appId": "1:475329238769:web:7ccdb82a47b7c06ea27b50",
-}'''
+    "measurementId": "G-L0PKH3JBR3",
+}
 
 
 class Diary(FlaskForm):
@@ -102,18 +103,6 @@ def registerr():
 
 @app.route('/diary', methods=["POST", "GET"])
 def diary():
-    config = {
-        "apiKey": "AIzaSyAvYvSqBoQzCUDK2oloq79JhPJGTw1DIUk",
-        "authDomain": "dashboard-50078.firebaseapp.com",
-        "databaseURL": "https://dashboard-50078-default-rtdb.firebaseio.com",
-        "projectId": "dashboard-50078",
-        "storageBucket": "dashboard-50078.appspot.com",
-        "messagingSenderId": "475329238769",
-        "appId": "1:475329238769:web:7ccdb82a47b7c06ea27b50",
-    }
-
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
     username = "shahrukh"
     forms = Diary()
     if forms.validate_on_submit():
