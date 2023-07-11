@@ -9,6 +9,7 @@ from keras.models import load_model
 import pickle
 import binascii
 from datetime import datetime
+import datetime
 import json
 from functools import wraps
 import re
@@ -30,6 +31,15 @@ config = {
     "appId": os.getenv("appId"),
     "measurementId": os.getenv("measurementId")
 }
+'''config = {
+    "apiKey": "AIzaSyAvYvSqBoQzCUDK2oloq79JhPJGTw1DIUk",
+    "authDomain": "dashboard-50078.firebaseapp.com",
+    "databaseURL": "https://dashboard-50078-default-rtdb.firebaseio.com",
+    "projectId": "dashboard-50078",
+    "storageBucket": "dashboard-50078.appspot.com",
+    "messagingSenderId": "475329238769",
+    "appId": "1:475329238769:web:7ccdb82a47b7c06ea27b50",
+}'''
 
 
 class Diary(FlaskForm):
@@ -379,6 +389,7 @@ def comedy():
 
 @app.route('/community', methods=["POST", "GET"])
 def community():
+
     if request.method == "POST":
         section = request.form['section']
         messages = get_section_messages(section)
@@ -386,7 +397,7 @@ def community():
     else:
         sections = ['discussion_forum', 'creative_corner',
                     'wellness_tips', 'selfcare_challenges', 'inspiration_corner']
-        return render_template('community.html', sections=sections)
+        return render_template('home.html', sections=sections)
 
 
 def get_section_messages(section):
@@ -397,11 +408,15 @@ def get_section_messages(section):
 
 @app.route('/section', methods=["POST", "GET"])
 def section():
+
     if request.method == "POST":
         section = request.args.get('section')
         username = 'sharukhali'
         message = request.form['message']
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         db.child(section).push({
             "username": username,
             "message": message,
