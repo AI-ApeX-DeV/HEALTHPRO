@@ -8,3 +8,6 @@ pandas
 Pyrebase4
 python-dotenv
 WTForms
+tensorflow
+pickle
+datetime
