@@ -10,3 +10,4 @@ python-dotenv
 WTForms
 tensorflow
 datetime
+gunicorn
